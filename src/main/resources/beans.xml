@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="subBean" class="com.example.di.xml.SubBean"></bean>
+    <bean id="di_constructor" class="com.example.di.xml.DI_Constructor">
+        <constructor-arg ref="subBean"/>
+        <constructor-arg type="int" value="123"/>
+        <constructor-arg index="2" value="miss bean"/>
+        <constructor-arg name="myDescription" value="xxxxx"/>
+    </bean>
+
+    <bean id="di_setter" class="com.example.di.xml.DI_Setter">
+        <property name="mySubBean" ref="subBean"/>
+        <property name="name" value="diSetter"/>
+        <property name="indexXXX" value="222"/>
+    </bean>
+
+    <bean id="di_setter_pnamespace" class="com.example.di.xml.DI_Setter"
+          p:mySubBean-ref="subBean"
+          p:name="diSetter_pnamespace"
+          p:indexXXX="2223"/>
+
+    <bean id="di_constructor_cnamespace" class="com.example.di.xml.DI_Constructor"
+          c:subBean-ref="subBean"
+          c:_1="12322"
+          c:name="missBEAN"
+          c:myDescription="di_constructor_cnamespace"/>
+
+    <bean id="di_setter_idref" class="com.example.di.xml.DI_Setter">
+        <property name="mySubBean" ref="subBean"/>
+        <property name="name">
+            <idref bean="subBean"/>
+        </property>
+        <property name="indexXXX" value="2224"/>
+    </bean>
+
+    <bean id="di_factoryMethod" class="com.example.di.xml.DI_FactoryMethod" factory-method="createInstance">
+        <constructor-arg name="myName" value="namexx"/>
+        <constructor-arg type="int" value="333"/>
+    </bean>
+
+    <bean id="di_collections" class="com.example.di.xml.BeanForCollections">
+        <property name="myProps">
+            <props>
+                <prop key="p1">v1</prop>
+                <prop key="p2">v2</prop>
+            </props>
+        </property>
+        <property name="list">
+            <list>
+                <value>the 1st value</value>
+                <value>the 2nd value</value>
+                <ref bean="subBean"></ref>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="m1" value="m1v1"/>
+                <entry key="m2">
+                    <value>m2v2</value>
+                </entry>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>the 1st set value</value>
+                <value>the 2nd set value</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="beanDependence" class="com.example.di.xml.depends.BeanDependence"/>
+
+    <bean id="beanHole" class="com.example.di.xml.depends.BeanHole" depends-on="beanDependence"/>
+</beans>
