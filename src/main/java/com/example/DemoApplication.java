@@ -1,9 +1,6 @@
 package com.example;
 
-import com.example.di.xml.BeanForCollections;
-import com.example.di.xml.BeanForFactoryMethod;
-import com.example.di.xml.DI_Constructor;
-import com.example.di.xml.DI_Setter;
+import com.example.di.xml.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,7 +32,8 @@ public class DemoApplication {
         BeanForCollections beanForCollections = context.getBean("di_collections", BeanForCollections.class);
         beanForCollections.out(7);
 
-//        context.getBean("beanHole", BeanHole.class);
+        MethodInjection methodInjection = context.getBean("methodInjection", MethodInjection.class);
+        methodInjection.out(8);
 
 	}
 }

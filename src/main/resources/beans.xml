@@ -76,4 +76,15 @@
     <bean id="beanDependence" class="com.example.di.xml.depends.BeanDependence"/>
 
     <bean id="beanHole" class="com.example.di.xml.depends.BeanHole" depends-on="beanDependence"/>
+
+    <bean id="beanForMethodInjection1" class="com.example.di.xml.BeanForMethodInjection1"
+          p:name="bean for method injection 1 !!!"/>
+
+    <bean id="beanForMethodInjection2" class="com.example.di.xml.BeanForMethodInjection2"
+          p:name="bean for method injection 2 !!!"/>
+
+    <bean id="methodInjection" class="com.example.di.xml.MethodInjection">
+        <lookup-method bean="beanForMethodInjection1" name="createBeanForMethodInjection"/>
+    </bean>
+
 </beans>
